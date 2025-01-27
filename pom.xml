@@ -2,29 +2,34 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    
     <groupId>org.springframework</groupId>
     <artifactId>jb-hello-world-maven</artifactId>
-    <packaging>jar</packaging>
+    
+    <!-- Change packaging type to WAR -->
+    <packaging>war</packaging>
+    
     <version>0.2.0</version>
 
     <!-- tag::joda[] -->
-     <properties>
-           <java.version>1.8</java.version>
-           <maven.compiler.source>1.8</maven.compiler.source>
-           <maven.compiler.target>1.8</maven.compiler.target>
-     </properties>
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 
-      <dependencies>
-           <dependency>
-               <groupId>joda-time</groupId>
-               <artifactId>joda-time</artifactId>
-               <version>2.2</version>
-           </dependency>
-       </dependencies>
-       <!-- end::joda[] -->
-       
+    <dependencies>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.2</version>
+        </dependency>
+    </dependencies>
+    <!-- end::joda[] -->
+    
     <build>
         <plugins>
+            <!-- Maven Shade Plugin for creating an executable JAR -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -45,6 +50,19 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <!-- Add the maven-war-plugin to handle WAR packaging -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <!-- Define where the webapp directory is -->
+                    <warSourceDirectory>${basedir}/src/main/webapp</warSourceDirectory>
+                    <!-- Optional: Set the location for the web.xml file -->
+                    <webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
+                </configuration>
             </plugin>
         </plugins>
     </build>
