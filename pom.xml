@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.springframework</groupId>
-    <artifactId>jb-hello-world-maven</artifactId>
+    <artifactId>hello_world</artifactId>
     <packaging>war</packaging>
     <version>0.1.0</version>
 
